@@ -1,0 +1,9 @@
+#!/bin/bash
+
+export PATH=$PATH:/usr/local/Elmer_devel_07-21-20/bin/
+
+elmerf90 MB.f90 -o MB.so
+
+elmerf90 sliding_funk_nsurges_n5_q.f90 -o sliding_funk_nsurges_n5.so
+
+ElmerSolver synthetic_TR_nfoldtest_n5.sif

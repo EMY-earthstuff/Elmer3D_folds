@@ -1,0 +1,25 @@
+#!/bin/bash
+
+cd ../Data/
+
+python simulate_tributaries_2.0.py
+
+cp ./bed_DEM.dat ./sfc_DEM.dat /DEMs
+
+cd ../progtests/
+
+export PATH=$PATH:/usr/local/Elmer_devel_07-21-20/bin/
+
+python Makegeo.py
+
+gmsh synthetic_prognostic.geo -1 -2
+
+ElmerGrid 14 2 synthetic_prognostic.msh -autoclean
+
+ElmerSolver synthetic_SS.sif
+
+cp ./synthetic_prognostic/mesh.boundary ./synthetic_prognostic/mesh.elements ./
+synthetic_prognostic/mesh.header ./synthetic_prognostic/mesh.nodes ./synthetic_buildup
+
+ElmerSolver synthetic_TR_buildup.sif
+

@@ -1,0 +1,9 @@
+#!/bin/bash
+
+export PATH=$PATH:/usr/local/Elmer_devel_07-21-20/bin/
+
+elmerf90 MB.f90 -o MB.so
+
+elmerf90 sliding_funk.f90 -o sliding_funk.so
+
+ElmerSolver synthetic_TR_big.sif
